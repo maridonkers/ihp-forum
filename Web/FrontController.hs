@@ -29,4 +29,5 @@ instance FrontController WebApplication where
 instance InitControllerContext WebApplication where
     initContext = do
         setLayout defaultLayout
+        initAutoRefresh
         initAuthentication @User

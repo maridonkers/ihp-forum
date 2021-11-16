@@ -109,31 +109,39 @@ renderLoggedInAs Nothing = [hsx|
 </div>
 |]
 
+-- The 'assetPath' function used below appends a `?v=SOME_VERSION` to
+-- the static assets in production This is useful to avoid users
+-- having old CSS and JS files in their browser cache once a new
+-- version is deployed See
+-- https://ihp.digitallyinduced.com/Guide/assets.html for more details
+
 stylesheets :: Html
-stylesheets = do
-    when isDevelopment [hsx|
-        <link rel="stylesheet" href="/vendor/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/vendor/flatpickr.min.css"/>
-        <link rel="stylesheet" href="/app.css"/>
-    |]
-    when isProduction [hsx|
-        <link rel="stylesheet" href="/prod.css"/>
+stylesheets = [hsx|
+        <link rel="stylesheet" href={assetPath "/vendor/bootstrap.min.css"}/>
+        <link rel="stylesheet" href={assetPath "/vendor/flatpickr.min.css"}/>
+        <link rel="stylesheet" href={assetPath "/app.css"}/>
     |]
 
 scripts :: Html
-scripts = do
-    when isDevelopment [hsx|
-        <script id="livereload-script" src="/livereload.js"></script>
-        <script src="/vendor/jquery-3.6.0.slim.min.js"></script>
-        <script src="/vendor/timeago.js"></script>
-        <script src="/vendor/popper.min.js"></script>
-        <script src="/vendor/bootstrap.min.js"></script>
-        <script src="/vendor/flatpickr.js"></script>
-        <script src="/helpers.js"></script>
-        <script src="/vendor/morphdom-umd.min.js"></script>
+scripts = [hsx|
+        {when isDevelopment devScripts}
+        <script src={assetPath "/vendor/jquery-3.6.0.slim.min.js"}></script>
+        <script src={assetPath "/vendor/timeago.js"}></script>
+        <script src={assetPath "/vendor/popper.min.js"}></script>
+        <script src={assetPath "/vendor/bootstrap.min.js"}></script>
+        <script src={assetPath "/vendor/flatpickr.js"}></script>
+        <script src={assetPath "/vendor/morphdom-umd.min.js"}></script>
+        <script src={assetPath "/vendor/turbolinks.js"}></script>
+        <script src={assetPath "/vendor/turbolinksInstantClick.js"}></script>
+        <script src={assetPath "/vendor/turbolinksMorphdom.js"}></script>
+        <script src={assetPath "/helpers.js"}></script>
+        <script src={assetPath "/ihp-auto-refresh.js"}></script>
+        <script src={assetPath "/app.js"}></script>
     |]
-    when isProduction [hsx|
-        <script src="/prod.js"></script>
+
+devScripts :: Html
+devScripts = [hsx|
+        <script id="livereload-script" src={assetPath "/livereload.js"} data-ws={liveReloadWebsocketUrl}></script>
     |]
 
 metaTags :: Html
@@ -144,6 +152,7 @@ metaTags = [hsx|
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="TODO"/>
     <meta property="og:description" content="TODO"/>
+    {autoRefreshMeta}
 |]
 
 
