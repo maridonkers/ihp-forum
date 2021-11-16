@@ -26,7 +26,7 @@ ALTER TABLE public.topics DISABLE TRIGGER ALL;
 INSERT INTO public.topics (id, name, description, threads_count, last_activity_at) VALUES ('9de25c37-17ab-42c6-8cf2-b75c3869c4e2', 'Haskell Questions', 'General Haskell Questions', 0, '2020-08-15 12:02:56.332506+01');
 INSERT INTO public.topics (id, name, description, threads_count, last_activity_at) VALUES ('b048709a-51f4-444b-a935-a3f9602de7b2', 'Database', 'Everything related to dealing with the database', 0, '2020-08-15 12:02:56.332714+01');
 INSERT INTO public.topics (id, name, description, threads_count, last_activity_at) VALUES ('2ecba42e-225d-481c-9aef-63f77f3659ac', 'Nix', 'Dealing with Nix', 0, '2020-08-15 12:02:56.333124+01');
-INSERT INTO public.topics (id, name, description, threads_count, last_activity_at) VALUES ('b3f690dd-6600-4460-8be7-be884e922aff', 'General', 'General questions regarding IHP', 0, '2020-09-22 16:33:05.006915+01');
+INSERT INTO public.topics (id, name, description, threads_count, last_activity_at) VALUES ('b3f690dd-6600-4460-8be7-be884e922aff', 'General', 'General questions regarding IHP', 3, '2020-09-22 16:33:05.006915+01');
 INSERT INTO public.topics (id, name, description, threads_count, last_activity_at) VALUES ('accc3289-b706-4d68-9da8-c9e0d2c07dfe', 'IHP Roadmap', 'Discussing new features for IHP', 1, '2020-09-22 16:35:43.682455+01');
 
 
